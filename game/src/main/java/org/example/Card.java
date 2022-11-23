@@ -1,4 +1,4 @@
-package com.nology.snapgame;
+package org.example;
 
 public class Card {
     public String suit;
@@ -18,7 +18,4 @@ public class Card {
         return String.format("%s of %s", symbol, suit);
     }
 
-    public static void main (String[] args){
-        System.out.println("hello");
-    }
 }

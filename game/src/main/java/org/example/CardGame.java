@@ -1,6 +1,7 @@
-package com.nology.snapgame;
+package org.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CardGame {
     static public String name = "";
@@ -18,19 +19,17 @@ public class CardGame {
             for (int j=0; j<13; j++) {
                 switch (i) {
                     case 0:
-                        deck.add(new Card("*", 0, symbols[j], cardValues[j]));
+                        deck.add(new Card("❤", 0, symbols[j], cardValues[j]));
                         break;
                     case 1:
-                        deck.add(new Card("&", 1, symbols[j], cardValues[j]));
+                        deck.add(new Card("♠", 1, symbols[j], cardValues[j]));
                         break;
                     case 2:
-                        deck.add(new Card("^", 2, symbols[j], cardValues[j]));
+                        deck.add(new Card("♣", 2, symbols[j], cardValues[j]));
                         break;
                     case 3:
-                        deck.add(new Card("£", 3, symbols[j], cardValues[j]));
+                        deck.add(new Card("♦", 3, symbols[j], cardValues[j]));
                         break;
-                    default:
-                        System.out.println("Hmm, something went wrong.");
                 }
             }
         }
@@ -42,7 +41,13 @@ public class CardGame {
 
     public static void dealCard() {
         field.add(deck.get(0));
+        System.out.println("Field card:"+field);
         deck.remove(0);
+    }
+
+
+    public static void sortDeckInNumberOrder() {
+        Collections.sort(deck, new SortDeckInNumber());
     }
 
 
