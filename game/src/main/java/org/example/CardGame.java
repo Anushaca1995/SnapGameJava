@@ -49,6 +49,15 @@ public class CardGame {
     public static void sortDeckInNumberOrder() {
         Collections.sort(deck, new SortDeckInNumber());
     }
+    public static void sortDeckIntoSuits() {
+        Collections.sort(deck, new SortDeckInNumber());
+    }
+
+    public static void shuffleDeck() {
+        Collections.sort(deck, new ShuffleInRandom());
+    }
+
+
 
 
 }
