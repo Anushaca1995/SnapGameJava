@@ -9,7 +9,7 @@ public class CardGame {
     static ArrayList<Card> field = new ArrayList<>();
     static String[] symbols = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
     static int[] cardValues = {14,2,3,4,5,6,7,8,9,10,11,12,13};
-
+    static ArrayList<Player> players = new ArrayList<>();
     public CardGame(String name) {
         this.name = name;
     }
@@ -45,6 +45,9 @@ public class CardGame {
         deck.remove(0);
     }
 
+    public static Card getFieldTopCard() {
+        return field.get(field.size()-1);
+    }
 
     public static void sortDeckInNumberOrder() {
         Collections.sort(deck, new SortDeckInNumber());
@@ -55,6 +58,20 @@ public class CardGame {
 
     public static void shuffleDeck() {
         Collections.sort(deck, new ShuffleInRandom());
+    }
+    public static void emptyField() {
+        field.clear();
+    }
+    public static void prepareGame() {
+        emptyField();
+        generateDeck();
+        shuffleDeck();
+    }
+
+    public static void generatePlayers(int amount) {
+        for (int i=0; i<amount; i++) {
+            players.add(new Player(i+1));
+        }
     }
 
 
