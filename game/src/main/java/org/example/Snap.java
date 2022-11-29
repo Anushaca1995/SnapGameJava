@@ -12,7 +12,9 @@ public class Snap extends CardGame {
 
     public static void playGame() {
         int playerAmt = 0;
-        System.out.println("Starting a new game of snap!");
+        boolean gameOver = false;
+        boolean playAgain = true;
+        System.out.println("Start Your Snap Game!");
         System.out.println("How many players? 1-2");
         String input = scObj.nextLine();
         try {
@@ -25,8 +27,6 @@ public class Snap extends CardGame {
         } catch (NumberFormatException e) {
             System.err.println("Players should be 1 or 2");
         }
-        boolean gameOver = false;
-        boolean playAgain = true;
         while (playAgain) {
             String winData = "";
             snapStr = "";
@@ -44,7 +44,7 @@ public class Snap extends CardGame {
                         System.out.println(String.format("%nVictories: %s", winData));
                         gameOver = true;
                     } else {
-                        System.out.printf("Player %d, press enter to deal", player.playerNumber);
+                        System.out.println(String.format("Player %d, press enter to deal", player.playerNumber));
                         try {
                             System.in.read();
                         } catch (IOException e) {
@@ -52,28 +52,32 @@ public class Snap extends CardGame {
                         }
                         dealCard();
                         if (field.size() > 1 && field.get(field.size() - 1).symbol.equals(field.get(field.size() - 2).symbol)) {
-                            System.out.printf("Quick Player %d, type SNAP in the next 1 seconds to win!", player.playerNumber);
-                            try {
-                                getSnap();
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                            if (snapStr.equalsIgnoreCase("snap")) {
-                                System.out.println(String.format("%nSnap! Player %d Wins!", player.playerNumber));
-                                player.addVictory();
+                            if (playerAmt == 2) {
+                                System.out.println(String.format("Quick Player %d, type SNAP in the next 2 seconds to win!", player.playerNumber));
+                                try {
+                                    getSnap();
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                                if (snapStr.equalsIgnoreCase("snap")) {
+                                    System.out.println(String.format("%nSnap! Player %d Wins!", player.playerNumber));
+                                    player.addVictory();
+                                } else {
+                                    System.out.println(String.format("Player %d missed their chance! Game Over.", player.playerNumber));
+                                }
+                                for (Player p : players) {
+                                    winData += String.format("Player %d: %d | ", p.playerNumber, p.victories);
+                                }
+                                System.out.println(String.format("Game Score: %s", winData));
                             } else {
-                                System.out.printf("Player %d missed their chance! Game Over.", player.playerNumber);
+                                System.out.println("Congrats! You won!");
                             }
-                            for (Player p : players) {
-                                winData += String.format("Player %d: %d | ", p.playerNumber, p.victories);
-                            }
-                            System.out.println(String.format("Game Score: %s", winData));
                             gameOver = true;
                         }
                     }
                 }
             }
-            System.out.println("Dou you want to play again? Y | N");
+            System.out.println("Do you want to play again? Y | N");
             String again = scObj.next();
             while (!again.equalsIgnoreCase("y") && !again.equalsIgnoreCase("n")) {
                 System.out.println("Invalid answer. Play again? Y | N");
@@ -81,6 +85,7 @@ public class Snap extends CardGame {
             }
             if (again.equalsIgnoreCase("y")) {
                 gameOver = false;
+                playAgain = true;
             } else {
                 playAgain = false;
             }
