@@ -8,4 +8,4 @@
 
  ♦   When the consecutive cards become same, then that player wins.
 
- ♦   <h3>Game Over..</h3>
+    <h3>♦  Game Over..</h3>
