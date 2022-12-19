@@ -1,6 +1,8 @@
 # SnapGameJava
 
  ♦   It's a console game, we can set number of players before start the game.
+ 
+ ♦  In hard mode, you need to type snap in 5 seconds to win after snap.
 
  ♦   Enter would randomly select a card from the deck.
 
